@@ -1,0 +1,168 @@
+@using GymSystemApp.DAL.Entities.Enums
+@model CreateMemberViewModel
+@{
+	ViewData["Title"] = "Create Member";
+}
+<header class="mb-4">
+    <h3 class="text-primary-color">Add Member</h3>
+</header>
+<form asp-controller="Member" asp-action="Create" method="post" enctype="multipart/form-data">
+
+    <!-- Step navigation -->
+    <ul class="nav nav-tabs mb-4" id="addMemberTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="member-tab" data-bs-toggle="tab" data-bs-target="#member-info"
+                    type="button" role="tab">
+                Member Info
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="health-tab" data-bs-toggle="tab" data-bs-target="#health-info"
+                    type="button" role="tab">
+                Health Data
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tab content -->
+    <div class="tab-content">
+        <!-- Member Info -->
+        <div class="tab-pane fade show active" id="member-info" role="tabpanel" aria-labelledby="member-tab">
+            <div class="section-header mb-3">
+                <h5 class="text-primary fw-bold">Personal Information</h5>
+                <hr class="mt-2">
+            </div>
+            <div class="row g-3">
+                <div class="form-group">
+                    <!-- Photo Preview -->
+                    <div class="mt-2">
+                        <img id="photoPreview" src="#" alt="Photo Preview" style="max-width: 200px; display: none;" class="img-thumbnail" />
+                    </div>
+
+                    <label asp-for="PhotoFile" class="control-label">Profile Photo <span class="text-danger">*</span></label>
+                    <input asp-for="PhotoFile" type="file" class="form-control" accept="image/*" id="photoInput" required />
+                    <span asp-validation-for="PhotoFile" class="text-danger"></span>
+
+                    <small class="form-text text-muted">Max size: 5 MB. Allowed types: JPG, PNG, GIF (Required)</small>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label asp-for="Name" class="form-label">Name</label>
+                    <input asp-for="Name"  class="form-control" />
+					<span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email"  class="form-control" />
+					<span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label asp-for="Phone" class="form-label">Phone</label>
+                    <input asp-for="Phone"  class="form-control" />
+					<span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label asp-for="DateOfBirth" class="form-label">DateOfBirth</label>
+                    <input asp-for="DateOfBirth" class="form-control" />
+					<span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label asp-for="Gender" class="form-label">Gender</label>
+                    <select asp-for="Gender" class="form-select" asp-items="Html.GetEnumSelectList<Gender>()">
+                        <option value="">-- Select Gender --</option>
+                       
+                    </select>
+					<span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="section-header mb-3 mt-4">
+                <h5 class="text-primary fw-bold">Address Information</h5>
+                <hr class="mt-2">
+            </div>
+            <div class="row g-3">
+
+                <div class="col-12 col-md-6">
+                    <label asp-for="BuildingNumber" class="form-label">BuildingNumber</label>
+                    <input asp-for="BuildingNumber" class="form-control" />
+                    <span asp-validation-for="BuildingNumber" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label asp-for="Street" class="form-label">Street</label>
+                    <input asp-for="Street" class="form-control" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label asp-for="City" class="form-label">City</label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Data -->
+        <div class="tab-pane fade" id="health-info" role="tabpanel" aria-labelledby="health-tab">
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <label asp-for="HealthRecordViewModel.Height" class="form-label">Height</label>
+                    <input asp-for="HealthRecordViewModel.Height" class="form-control" />
+					<span asp-validation-for="HealthRecordViewModel.Height" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label asp-for="HealthRecordViewModel.Weight" class="form-label">Weight</label>
+                    <input asp-for="HealthRecordViewModel.Weight" class="form-control" />
+					<span asp-validation-for="HealthRecordViewModel.Weight" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label asp-for="HealthRecordViewModel.BloodType" class="form-label">Blood Type</label>
+                    <select asp-for="HealthRecordViewModel.BloodType" class="form-select">
+                        <option value="">Select</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                    </select>
+                    <span asp-validation-for="HealthRecordViewModel.BloodType" class="text-danger"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label asp-for="HealthRecordViewModel.Note" class="form-label">Note</label>
+                    <input asp-for="HealthRecordViewModel.Note" class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="d-flex justify-content-end gap-3 mt-4">
+        <a asp-controller="Member" asp-action="Index" class="btn btn-outline-secondary px-4">
+            <i class="bi bi-arrow-left me-2"></i> Back to List
+        </a>
+
+        <button type="submit" class="btn btn-primary px-4">
+            <i class="bi bi-plus-circle me-2"></i> Add
+        </button>
+    </footer>
+
+</form>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+            document.getElementById('photoInput').addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        if (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        var preview = document.getElementById('photoPreview');
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+        }
+        });
+    </script>
+}
