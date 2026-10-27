@@ -75,6 +75,3 @@ Special thanks to Eng. Ahmed Nasser for his guidance and mentorship, and to Rout
 Salma Salah
 
 Individually developed as part of the Backend .NET Diploma at Route Academy.
-**Salma Salah**
-
-Individually developed as part of the Backend .NET Diploma at Route Academy
